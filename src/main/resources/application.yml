@@ -10,3 +10,10 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-postgresql.sql
+      table-name: SPRING_SESSION
