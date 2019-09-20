@@ -1,0 +1,8 @@
+package xyz.rtxux.game.shisanshui.repository
+
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
+import xyz.rtxux.game.shisanshui.model.UserDO
+
+@Repository
+interface UserRepository : JpaRepository<UserDO, Int>
