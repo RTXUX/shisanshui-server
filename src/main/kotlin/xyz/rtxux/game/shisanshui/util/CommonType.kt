@@ -5,7 +5,7 @@ import xyz.rtxux.game.shisanshui.model.Card
 fun tongHuaShun(cards: List<Card>): Int {
     if (cards.size != 5)
         return 0
-    val pointCount = IntArray(13, { i -> 0 })
+    val pointCount = IntArray(13) { i -> 0 }
     var colorCount = 0
     cards.forEach {
         if (pointCount[it.point - 1] == 1) {
@@ -27,13 +27,13 @@ fun tongHuaShun(cards: List<Card>): Int {
             return 0
         }
     }
-    return begin + 4 + 1
+    return begin + 4
 }
 
 fun zhaDan(cards: List<Card>): Int {
     if (cards.size != 5)
         return 0
-    val pointCount = IntArray(13, { i -> 0 })
+    val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
         pointCount[it.point - 1]++;
     }
@@ -43,5 +43,26 @@ fun zhaDan(cards: List<Card>): Int {
             boom = index
         }
     }
-    return boom + 1
+
+    return boom
+}
+
+fun huLu(cards: List<Card>): Int {
+    if (cards.size != 5)
+        return 0
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        pointCount[it.point - 1]++;
+    }
+    var huLu3 = 0
+    var huLu2 = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i == 3) {
+            huLu3 = index
+        }
+        else if (i == 2) {
+            huLu2 = index
+        }
+    }
+    return huLu3
 }
