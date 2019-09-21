@@ -109,3 +109,37 @@ fun sunZi(cards: List<Card>): Int {
     }
     return begin + 4
 }
+
+fun sanTiao(cards: List<Card>): Int {
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        pointCount[it.point - 1]++;
+    }
+    var san = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i == 3) {
+            san = index
+        }
+    }
+    return san
+}
+
+fun erDui(cards: List<Card>): Int {
+    if (cards.size != 5)
+        return 0
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        pointCount[it.point - 1]++;
+    }
+    var er = 0
+    var num = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i == 2) {
+            er = index
+            num ++
+        }
+    }
+    if (num==0)return 0
+    return er
+}
+
