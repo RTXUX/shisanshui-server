@@ -79,7 +79,6 @@ fun tongHua(cards: List<Card>): Int {
         if (color!=it.color)
             return 0
     }
-
     var hua = 0
     pointCount.forEachIndexed { index, i ->
         if (i != 0) {
@@ -87,4 +86,26 @@ fun tongHua(cards: List<Card>): Int {
         }
     }
     return hua
+}
+
+fun sunZi(cards: List<Card>): Int {
+    if (cards.size != 5)
+        return 0
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        if (pointCount[it.point - 1] == 1) {
+            return 0
+        }
+        pointCount[it.point - 1] = 1
+    }
+    var begin = 0
+    pointCount.forEachIndexed { index, i ->
+        if (begin == 0 && i != 0) {
+            begin = index
+        }
+        if (begin != 0 && i == 0 && index - begin < 5) {
+            return 0
+        }
+    }
+    return begin + 4
 }
