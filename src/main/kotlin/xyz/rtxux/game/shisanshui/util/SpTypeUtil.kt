@@ -6,10 +6,10 @@ fun zhiZunQinLong(cards: List<Card>): Int {
     val pointCount = IntArray(13)
     var colorCount = 0
     cards.forEach {
-        if (pointCount[it.point-1] == 1) {
+        if (pointCount[it.point - 1] == 1) {
             return 0
         }
-        pointCount[it.point-1] = 1
+        pointCount[it.point - 1] = 1
         if (colorCount == 0) {
             colorCount = it.color
         }
@@ -23,10 +23,10 @@ fun zhiZunQinLong(cards: List<Card>): Int {
 fun yiTiaoLong(cards: List<Card>): Int {
     val pointCount = IntArray(13)
     cards.forEach {
-        if (pointCount[it.point-1] == 1) {
+        if (pointCount[it.point - 1] == 1) {
             return 0
         }
-        pointCount[it.point-1] = 1
+        pointCount[it.point - 1] = 1
     }
     return 1
 }
