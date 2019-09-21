@@ -66,3 +66,25 @@ fun huLu(cards: List<Card>): Int {
     }
     return huLu3
 }
+
+fun tongHua(cards: List<Card>): Int {
+    if (cards.size != 5)
+        return 0
+    val pointCount = IntArray(13) { i -> 0 }
+    var color = 0
+    cards.forEach {
+        pointCount[it.point - 1]++;
+        if (color==0)
+            color=it.color
+        if (color!=it.color)
+            return 0
+    }
+
+    var hua = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i != 0) {
+            hua = index
+        }
+    }
+    return hua
+}
