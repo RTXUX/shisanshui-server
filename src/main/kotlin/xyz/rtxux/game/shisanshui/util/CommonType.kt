@@ -135,6 +135,8 @@ fun erDui(cards: List<Card>): Int {
     var num = 0
     pointCount.forEachIndexed { index, i ->
         if (i == 2) {
+            if (index==er+1)
+                return 13 + er
             er = index
             num ++
         }
@@ -143,3 +145,30 @@ fun erDui(cards: List<Card>): Int {
     return er
 }
 
+fun duiZi(cards: List<Card>): Int {
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        pointCount[it.point - 1]++;
+    }
+    var er = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i == 2) {
+            er = index
+        }
+    }
+    return er
+}
+
+fun danPai(cards: List<Card>): Int {
+    val pointCount = IntArray(13) { i -> 0 }
+    cards.forEach {
+        pointCount[it.point - 1]++;
+    }
+    var dan = 0
+    pointCount.forEachIndexed { index, i ->
+        if (i == 2) {
+            dan = index
+        }
+    }
+    return dan
+}
