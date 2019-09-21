@@ -64,6 +64,7 @@ fun huLu(cards: List<Card>): Int {
             huLu2 = index
         }
     }
+    if (huLu2 ==0)return 0
     return huLu3
 }
 
