@@ -96,7 +96,11 @@ fun couYiSe(cards: List<Card>): Int {
 }
 
 fun shuangGuaiCongSan(cards: List<Card>): Int {
-    //TODO
+    cardTo3(cards).forEach {
+        if (it.size==3&& duiZi(it)==0)return 0
+        else if (it.size==5&& huLu(it)==0)return 0
+        else return 0
+    }
     return 0
 }
 
@@ -118,7 +122,7 @@ fun siTaoSanTiao(cards: List<Card>): Int {
 }
 
 
-//TODO
+
 fun wuDuiSanTiao(cards: List<Card>): Int {
     val hash = HashMap<Int, Int>()
     cards.forEach {
@@ -136,7 +140,7 @@ fun wuDuiSanTiao(cards: List<Card>): Int {
     return 1
 }
 
-//TODO
+
 fun liuDuiBan(cards: List<Card>): Int {
     val hash = HashMap<Int, Int>()
     cards.forEach {
