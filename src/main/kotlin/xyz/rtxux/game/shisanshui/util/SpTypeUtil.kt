@@ -124,12 +124,12 @@ fun wuDuiSanTiao(cards: List<Card>): Int {
     cards.forEach {
         hash[it.point] = (hash[it.point] ?: 0) + 1
     }
-    if (hash.size > 4) {
+    if (hash.size > 6) {
         return 0
     }
     var flag = false
     hash.forEach { (_, v) ->
-        flag = flag || v != 3 && v != 1
+        flag = flag || v != 3 && v != 2
     }
     if (flag)
         return 0
@@ -142,12 +142,12 @@ fun liuDuiBan(cards: List<Card>): Int {
     cards.forEach {
         hash[it.point] = (hash[it.point] ?: 0) + 1
     }
-    if (hash.size > 4) {
+    if (hash.size > 7) {
         return 0
     }
     var flag = false
     hash.forEach { (_, v) ->
-        flag = flag || v != 3 && v != 1
+        flag = flag || v != 2 && v != 1
     }
     if (flag)
         return 0
