@@ -45,7 +45,33 @@ fun shiErHuangZhu(cards: List<Card>): Int {
 }
 
 fun sanTongHuaSun(cards: List<Card>): Int {
-    //TODO
+    cardTo3(cards).forEach {
+        if (it.size==3){
+            val pointCount = IntArray(13) { i -> 0 }
+            var colorCount = 0
+            cards.forEach {
+                if (pointCount[it.point - 1] == 1) {
+                    return 0
+                }
+                pointCount[it.point - 1] = 1
+                if (colorCount == 0) {
+                    colorCount = it.color
+                }
+                if (colorCount != it.color)
+                    return 0
+            }
+            var begin = 0
+            pointCount.forEachIndexed { index, i ->
+                if (begin == 0 && i != 0) {
+                    begin = index
+                }
+                if (begin != 0 && i == 0 && index - begin < 3) {
+                    return 0
+                }
+            }
+        }
+        else if (it.size==5 && tongHuaShun(it)==0)return 0
+    }
     return 0
 }
 
@@ -99,7 +125,6 @@ fun shuangGuaiCongSan(cards: List<Card>): Int {
     cardTo3(cards).forEach {
         if (it.size==3&& duiZi(it)==0)return 0
         else if (it.size==5&& huLu(it)==0)return 0
-        else return 0
     }
     return 0
 }
@@ -179,8 +204,6 @@ fun sanSunZI(cards: List<Card>): Int {
             }
         } else if (it.size == 5) {
             if (sunZi(it) == 0) return 0
-        } else {
-            return 0
         }
     }
     return 1
