@@ -115,3 +115,25 @@ fun check5(cards: List<Card>) {
 fun check3(cards: List<Card>) {
     check(cards, 3)
 }
+
+fun cardTo3(cards: List<Card>): List<List<Card>> {
+    val ans = Array<ArrayList<Card>>(3) { i -> arrayListOf() }
+    cards.forEachIndexed { index, card ->
+        if (index < 3) ans[0].add(card)
+        if (index < 8) ans[1].add(card)
+        if (index < 13) ans[2].add(card)
+    }
+    return ans.map {
+        it.toList()
+    }
+}
+
+fun cardTo1(cards: List<List<Card>>): List<Card> {
+    val ans = arrayListOf<Card>()
+    cards.map {
+        it.map {
+            ans.add(it)
+        }
+    }
+    return ans.toList()
+}

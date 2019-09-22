@@ -35,7 +35,7 @@ fun zhaDan(cards: List<Card>): Int {
         return 0
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var boom = 0
     pointCount.forEachIndexed { index, i ->
@@ -52,32 +52,31 @@ fun huLu(cards: List<Card>): Int {
         return 0
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var huLu3 = 0
     var huLu2 = 0
     pointCount.forEachIndexed { index, i ->
         if (i == 3) {
             huLu3 = index
-        }
-        else if (i == 2) {
+        } else if (i == 2) {
             huLu2 = index
         }
     }
-    if (huLu2 ==0)return 0
+    if (huLu2 == 0) return 0
     return huLu3
 }
 
-fun tongHua(cards: List<Card>): Int {
-    if (cards.size != 5)
+fun tongHua(cards: List<Card>,isSp:Boolean = false): Int {
+    if (cards.size != 5&&!isSp)
         return 0
     val pointCount = IntArray(13) { i -> 0 }
     var color = 0
     cards.forEach {
-        pointCount[it.point - 1]++;
-        if (color==0)
-            color=it.color
-        if (color!=it.color)
+        pointCount[it.point - 1]++
+        if (color == 0)
+            color = it.color
+        if (color != it.color)
             return 0
     }
     var hua = 0
@@ -114,7 +113,7 @@ fun sunZi(cards: List<Card>): Int {
 fun sanTiao(cards: List<Card>): Int {
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var san = 0
     pointCount.forEachIndexed { index, i ->
@@ -130,26 +129,26 @@ fun erDui(cards: List<Card>): Int {
         return 0
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var er = 0
     var num = 0
     pointCount.forEachIndexed { index, i ->
         if (i == 2) {
-            if (index==er+1)
+            if (index == er + 1)
                 return 13 + er
             er = index
-            num ++
+            num++
         }
     }
-    if (num==0)return 0
+    if (num == 0) return 0
     return er
 }
 
 fun duiZi(cards: List<Card>): Int {
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var er = 0
     pointCount.forEachIndexed { index, i ->
@@ -163,7 +162,7 @@ fun duiZi(cards: List<Card>): Int {
 fun danPai(cards: List<Card>): Int {
     val pointCount = IntArray(13) { i -> 0 }
     cards.forEach {
-        pointCount[it.point - 1]++;
+        pointCount[it.point - 1]++
     }
     var dan = 0
     pointCount.forEachIndexed { index, i ->

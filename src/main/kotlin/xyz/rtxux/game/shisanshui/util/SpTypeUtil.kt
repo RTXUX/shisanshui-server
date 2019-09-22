@@ -100,7 +100,7 @@ fun shuangGuaiCongSan(cards: List<Card>): Int {
     return 0
 }
 
-fun siTaoSanCong(cards: List<Card>): Int {
+fun siTaoSanTiao(cards: List<Card>): Int {
     val hash = HashMap<Int, Int>()
     cards.forEach {
         hash[it.point] = (hash[it.point] ?: 0) + 1
@@ -154,7 +154,37 @@ fun liuDuiBan(cards: List<Card>): Int {
     return 1
 }
 
+fun sanSunZI(cards: List<Card>): Int {
+    cardTo3(cards).forEach {
+        if (it.size == 3) {
+            val pointCount = IntArray(13) { i -> 0 }
+            cards.forEach {
+                if (pointCount[it.point - 1] == 1) {
+                    return 0
+                }
+                pointCount[it.point - 1] = 1
+            }
+            var begin = 0
+            pointCount.forEachIndexed { index, i ->
+                if (begin == 0 && i != 0) {
+                    begin = index
+                }
+                if (begin != 0 && i == 0 && index - begin < 3) {
+                    return 0
+                }
+            }
+        } else if (it.size == 5) {
+            if (sunZi(it) == 0) return 0
+        } else {
+            return 0
+        }
+    }
+    return 1
+}
+
 fun sanTongHua(cards: List<Card>): Int {
-    //TODO
+    cardTo3(cards).forEach {
+        if (tongHua(it)==0)return 0
+    }
     return 1
 }
