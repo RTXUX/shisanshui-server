@@ -26,13 +26,13 @@ class ChangeUtilTests {
         assert(strToPoint("a") == 13)
     }
 
-    @Test
-    fun testCardsToStr() {
-        assert(cardsToStr(listOf("*1", "$2", "*3")) == "*1$2*3")
-        assert(cardsToStr(listOf("*1")) == "*1")
-        assert(cardsToStr(listOf("*1", "*2", "*3")) == "*1*2*3")
-        assert(cardsToStr(listOf("*1", "*A", "*3")) == "*1*A*3")
-    }
+//    @Test
+//    fun testCardsToStr() {
+//        assert(cardsToStr(listOf("*1", "$2", "*3")) == "*1$2*3")
+//        assert(cardsToStr(listOf("*1")) == "*1")
+//        assert(cardsToStr(listOf("*1", "*2", "*3")) == "*1*2*3")
+//        assert(cardsToStr(listOf("*1", "*A", "*3")) == "*1*A*3")
+//    }
 
     @Test
     fun testStrToCards() {
