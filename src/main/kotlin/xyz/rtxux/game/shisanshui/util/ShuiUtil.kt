@@ -1,7 +1,5 @@
 package xyz.rtxux.game.shisanshui.util
 
-import xyz.rtxux.game.shisanshui.model.CardType
-
 fun countCommonShui(type: CardType, round: Int): Int {
     if (type.rank == 0) return 0
     if (type.rank < 7) return 1

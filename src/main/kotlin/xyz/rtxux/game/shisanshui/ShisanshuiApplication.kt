@@ -8,7 +8,7 @@ import org.springframework.boot.runApplication
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
-import xyz.rtxux.game.shisanshui.model.UserDO
+import xyz.rtxux.game.shisanshui.model.domain.UserDO
 import xyz.rtxux.game.shisanshui.repository.UserRepository
 import java.time.Instant
 

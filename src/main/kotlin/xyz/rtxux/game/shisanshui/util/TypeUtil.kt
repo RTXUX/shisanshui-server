@@ -1,8 +1,5 @@
 package xyz.rtxux.game.shisanshui.util
 
-import xyz.rtxux.game.shisanshui.model.Card
-import xyz.rtxux.game.shisanshui.model.CardType
-
 fun check(cards: List<Card>): CardType {
 
     val sp = checkSp(cards)

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
 import xyz.rtxux.game.shisanshui.exception.AppException
-import xyz.rtxux.game.shisanshui.model.ResponseObject
+import xyz.rtxux.game.shisanshui.model.dto.ResponseObject
 import javax.servlet.http.HttpServletRequest
 
 @ControllerAdvice

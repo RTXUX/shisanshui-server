@@ -1,7 +1,5 @@
 package xyz.rtxux.game.shisanshui.util
 
-import xyz.rtxux.game.shisanshui.model.Card
-
 fun zhiZunQinLong(cards: List<Card>): Int {
     val pointCount = IntArray(13)
     var colorCount = 0

@@ -3,7 +3,6 @@ package xyz.rtxux.game.shisanshui.util
 
 import water.exception.CardNumException
 import water.exception.FormatException
-import xyz.rtxux.game.shisanshui.model.Card
 
 val cardToPointRegex = Regex("[*&#\$]([1-9JQKAjqka])")
 

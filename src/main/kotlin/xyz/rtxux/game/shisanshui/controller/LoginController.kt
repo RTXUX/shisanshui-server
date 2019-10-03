@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import xyz.rtxux.game.shisanshui.exception.AppException
-import xyz.rtxux.game.shisanshui.model.LoginDTO
+import xyz.rtxux.game.shisanshui.model.dto.LoginDTO
 import xyz.rtxux.game.shisanshui.repository.UserRepository
 import javax.servlet.http.HttpServletRequest
 

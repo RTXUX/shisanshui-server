@@ -1,7 +1,5 @@
 package xyz.rtxux.game.shisanshui.util
 
-import xyz.rtxux.game.shisanshui.model.Card
-
 fun tongHuaShun(cards: List<Card>): Int {
     if (cards.size != 5)
         return 0
@@ -67,7 +65,7 @@ fun huLu(cards: List<Card>): Int {
     return huLu3
 }
 
-fun tongHua(cards: List<Card>,isSp:Boolean = false): Int {
+fun tongHua(cards: List<Card>, isSp:Boolean = false): Int {
     if (cards.size != 5&&!isSp)
         return 0
     val pointCount = IntArray(13) { i -> 0 }

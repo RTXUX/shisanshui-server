@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.model
+package xyz.rtxux.game.shisanshui.model.domain
 
 import java.io.Serializable
 import java.time.Instant

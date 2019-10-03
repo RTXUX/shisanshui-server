@@ -1,7 +1,6 @@
 package xyz.rtxux.game.shisanshui.util
 
 import org.junit.Test
-import xyz.rtxux.game.shisanshui.model.Card
 
 class ChangeUtilTests {
     @Test
