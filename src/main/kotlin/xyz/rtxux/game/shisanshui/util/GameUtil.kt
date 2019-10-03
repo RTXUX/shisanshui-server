@@ -1,5 +1,8 @@
 package xyz.rtxux.game.shisanshui.util
 
+import xyz.rtxux.game.shisanshui.logic.Card
+import xyz.rtxux.game.shisanshui.logic.HelpUtil
+
 object GameUtil {
 
     fun checkCheat(cards: List<Card>, originalCards: List<Card>): Boolean {
@@ -8,5 +11,11 @@ object GameUtil {
 
     fun checkSanity(cards: List<List<Card>>): Boolean {
         return true
+    }
+
+    fun stringToCards(string: String): List<Card> {
+        return string.split(' ').map {
+            HelpUtil.convertStringToSingleCard(it)
+        }.toList()
     }
 }

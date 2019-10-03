@@ -1,6 +1,10 @@
 package xyz.rtxux.game.shisanshui.util
 
 import org.junit.Test
+import xyz.rtxux.game.shisanshui.obsolete.shiErHuangZhu
+import xyz.rtxux.game.shisanshui.obsolete.strToCards
+import xyz.rtxux.game.shisanshui.obsolete.yiTiaoLong
+import xyz.rtxux.game.shisanshui.obsolete.zhiZunQinLong
 
 class SpTypeUtilTests {
     @Test

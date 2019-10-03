@@ -1,33 +1,42 @@
 package xyz.rtxux.game.shisanshui.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class HelpUtil {
-	
+	public static final List<String> numberList = new ArrayList<String>(Arrays.asList(
+			null, "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
+	));
 	public static String getSuitStr(int suit) {
 		if (PokerSuitEnum.SPADE.getValue() == suit) {
-			return "♠";
+			return "$";
 		} else if (PokerSuitEnum.HEART.getValue() == suit) {
-			return "♥";
+			return "&";
 		} else if (PokerSuitEnum.DIAMOND.getValue() == suit) {
-			return "♦";
+			return "#";
 		} else {
-			return "♣";
+			return "*";
 		}
 	}
 	
 	public static int getSuit(String suit) {
-		if ("♠".equals(suit)) {
+		if ("$".equals(suit)) {
 			return PokerSuitEnum.SPADE.getValue();
-		} else if ("♥".equals(suit)) {
+		} else if ("&".equals(suit)) {
 			return PokerSuitEnum.HEART.getValue();
-		} else if ("♦".equals(suit)) {
+		} else if ("#".equals(suit)) {
 			return PokerSuitEnum.DIAMOND.getValue();
 		} else {
 			return PokerSuitEnum.CLUB.getValue();
 		}
+	}
+	
+	public static Card convertStringToSingleCard(String str) {
+		int suit = getSuit("" + str.charAt(0));
+		int num = numberList.indexOf(str);
+		return new Card(num, suit);
 	}
 	
 	public static List<Card> converCardArrayToCardList(String[] cardArray) {

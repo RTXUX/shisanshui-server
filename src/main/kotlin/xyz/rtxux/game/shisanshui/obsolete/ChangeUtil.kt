@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.util
+package xyz.rtxux.game.shisanshui.obsolete
 
 
 import water.exception.CardNumException

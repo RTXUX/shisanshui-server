@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.util
+package xyz.rtxux.game.shisanshui.obsolete
 
 fun tongHuaShun(cards: List<Card>): Int {
     if (cards.size != 5)

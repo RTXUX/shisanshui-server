@@ -33,9 +33,6 @@ public class Card {
 	
 	@Override
 	public String toString() {
-		return "{" +
-				       "number=" + number +
-				       ", suit=" + suit +
-				       '}';
+		return HelpUtil.getSuitStr(suit) + HelpUtil.numberList.get(number);
 	}
 }

@@ -1,6 +1,8 @@
 package xyz.rtxux.game.shisanshui.util
 
 import org.junit.Test
+import xyz.rtxux.game.shisanshui.obsolete.checkCommon
+import xyz.rtxux.game.shisanshui.obsolete.strToCards
 
 class TypeUtilTests {
     @Test

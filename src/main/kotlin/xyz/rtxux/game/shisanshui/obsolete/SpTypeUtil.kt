@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.util
+package xyz.rtxux.game.shisanshui.obsolete
 
 fun zhiZunQinLong(cards: List<Card>): Int {
     val pointCount = IntArray(13)
@@ -67,8 +67,7 @@ fun sanTongHuaSun(cards: List<Card>): Int {
                     return 0
                 }
             }
-        }
-        else if (it.size==5 && tongHuaShun(it)==0)return 0
+        } else if (it.size == 5 && tongHuaShun(it) == 0) return 0
     }
     return 0
 }
@@ -121,8 +120,8 @@ fun couYiSe(cards: List<Card>): Int {
 
 fun shuangGuaiCongSan(cards: List<Card>): Int {
     cardTo3(cards).forEach {
-        if (it.size==3&& duiZi(it)==0)return 0
-        else if (it.size==5&& huLu(it)==0)return 0
+        if (it.size == 3 && duiZi(it) == 0) return 0
+        else if (it.size == 5 && huLu(it) == 0) return 0
     }
     return 0
 }
@@ -209,7 +208,7 @@ fun sanSunZI(cards: List<Card>): Int {
 
 fun sanTongHua(cards: List<Card>): Int {
     cardTo3(cards).forEach {
-        if (tongHua(it)==0)return 0
+        if (tongHua(it) == 0) return 0
     }
     return 1
 }

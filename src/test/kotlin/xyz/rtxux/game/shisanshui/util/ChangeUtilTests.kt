@@ -1,6 +1,10 @@
 package xyz.rtxux.game.shisanshui.util
 
 import org.junit.Test
+import xyz.rtxux.game.shisanshui.obsolete.Card
+import xyz.rtxux.game.shisanshui.obsolete.cardToPoint
+import xyz.rtxux.game.shisanshui.obsolete.strToCards
+import xyz.rtxux.game.shisanshui.obsolete.strToPoint
 
 class ChangeUtilTests {
     @Test

@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.util
+package xyz.rtxux.game.shisanshui.obsolete
 
 fun check(cards: List<Card>): CardType {
 

@@ -1,4 +1,4 @@
-package xyz.rtxux.game.shisanshui.util
+package xyz.rtxux.game.shisanshui.obsolete
 
 fun countCommonShui(type: CardType, round: Int): Int {
     if (type.rank == 0) return 0
