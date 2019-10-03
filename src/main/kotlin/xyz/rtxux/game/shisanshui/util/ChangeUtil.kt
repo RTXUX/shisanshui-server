@@ -40,8 +40,8 @@ fun strToCards(str: String): List<Card> {
     }
 }
 
-fun cardsToStr(cards: List<String>): String {
-    return cards.joinToString("")
+fun cardsToStr(cards: List<Card>): String {
+    return cards.joinToString(" ")
 }
 
 fun strToPoint(str: String): Int {
@@ -96,6 +96,17 @@ fun pointToStr(point: Int): String {
         13 -> return "A"
         else -> throw FormatException(point.toString())
     }
+}
+
+fun colorToStr(color: Int): String {
+    when (color) {
+        1 -> return "$"
+        2 -> return "&"
+        3 -> return "*"
+        4 -> return "#"
+        else -> throw IllegalArgumentException("Not valid card")
+    }
+
 }
 
 

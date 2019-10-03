@@ -6,4 +6,6 @@ import xyz.rtxux.game.shisanshui.model.domain.UserCombatDO
 import xyz.rtxux.game.shisanshui.model.domain.UserCombatId
 
 @Repository
-interface UserCombatRepository : JpaRepository<UserCombatDO, UserCombatId>
+interface UserCombatRepository : JpaRepository<UserCombatDO, UserCombatId> {
+
+}

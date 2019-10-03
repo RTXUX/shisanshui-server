@@ -9,6 +9,9 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
         globally_quoted_identifiers: true
 
   session:
