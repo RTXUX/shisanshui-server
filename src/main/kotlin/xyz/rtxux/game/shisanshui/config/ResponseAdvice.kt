@@ -20,8 +20,7 @@ class ResponseAdvice : ResponseBodyAdvice<Any> {
 
     override fun beforeBodyWrite(body: Any?, returnType: MethodParameter, selectedContentType: MediaType, selectedConverterType: Class<out HttpMessageConverter<*>>, request: ServerHttpRequest, response: ServerHttpResponse): Any? {
         if (body is ResponseObject) return body
-        val responseObject = ResponseObject(0, body)
-        return responseObject
+        return ResponseObject(0, body)
     }
 
     @ExceptionHandler(Exception::class)
