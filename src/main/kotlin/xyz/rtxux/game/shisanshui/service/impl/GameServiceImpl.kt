@@ -6,12 +6,16 @@ import xyz.rtxux.game.shisanshui.compare.CardSet
 import xyz.rtxux.game.shisanshui.compare.CompareCtrl
 import xyz.rtxux.game.shisanshui.exception.AppException
 import xyz.rtxux.game.shisanshui.logic.Card
+import xyz.rtxux.game.shisanshui.model.domain.CombatDO
+import xyz.rtxux.game.shisanshui.model.domain.UserCombatDO
 import xyz.rtxux.game.shisanshui.model.domain.UserCombatId
+import xyz.rtxux.game.shisanshui.model.dto.OpenCombatDTO
 import xyz.rtxux.game.shisanshui.repository.CombatRepository
 import xyz.rtxux.game.shisanshui.repository.UserCombatRepository
 import xyz.rtxux.game.shisanshui.repository.UserRepository
 import xyz.rtxux.game.shisanshui.service.GameService
 import xyz.rtxux.game.shisanshui.util.GameUtil
+import java.time.Instant
 
 @Service
 class GameServiceImpl @Autowired constructor(
@@ -64,5 +68,38 @@ class GameServiceImpl @Autowired constructor(
         userCombatRepository.save(userCombat)
     }
 
+    override fun joinCombat(playerId: Int, combatId: Int): OpenCombatDTO {
+        val combat = combatRepository.findById(combatId).orElseThrow { AppException("Room not found", null, 5000) }
+        val usersInCombat = combat.users!!
+        if (usersInCombat.size == 0 || usersInCombat.size > 3 || usersInCombat.any { it.id!!.userId == playerId }) {
+            throw IllegalArgumentException("Room full or player already in room")
+        }
+        val cardSequenceString = combat.cardSequence!!
+        val cardSequence = GameUtil.stringToCards(cardSequenceString)
+        val cardToSend = cardSequence.subList((usersInCombat.size) * 13, (usersInCombat.size + 1) * 13)
+        val openCombatDTO = OpenCombatDTO(id = combatId, card = cardToSend.joinToString(" "))
+        val userCombatDO = UserCombatDO(
+                id = UserCombatId(userId = playerId, combatId = combatId),
+                card = arrayOf(openCombatDTO.card),
+                startTime = Instant.now()
+        )
+        userCombatRepository.save(userCombatDO)
+        return openCombatDTO
+    }
+
+    override fun newCombat(playerId: Int): OpenCombatDTO {
+        val cardSequence = GameUtil.randomCards()
+        var combat = CombatDO(cardSequence = cardSequence.joinToString(" "))
+        combat = combatRepository.save(combat)
+        val cardToSend = cardSequence.subList(0, 13)
+        val openCombatDTO = OpenCombatDTO(id = combat.id!!, card = cardToSend.joinToString(" "))
+        val userCombatDO = UserCombatDO(
+                id = UserCombatId(userId = playerId, combatId = combat.id!!),
+                card = arrayOf(openCombatDTO.card),
+                startTime = Instant.now()
+        )
+        userCombatRepository.save(userCombatDO)
+        return openCombatDTO
+    }
 
 }

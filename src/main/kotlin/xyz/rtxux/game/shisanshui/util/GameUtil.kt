@@ -18,4 +18,9 @@ object GameUtil {
             HelpUtil.convertStringToSingleCard(it)
         }.toList()
     }
+
+    fun randomCards(): List<Card> {
+        return HelpUtil.cache.values.shuffled()
+    }
+
 }

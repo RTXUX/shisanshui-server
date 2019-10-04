@@ -7,5 +7,5 @@ import xyz.rtxux.game.shisanshui.model.domain.UserCombatId
 
 @Repository
 interface UserCombatRepository : JpaRepository<UserCombatDO, UserCombatId> {
-
+    fun findAllByIdCombatId(combatId: Int): List<UserCombatDO>
 }

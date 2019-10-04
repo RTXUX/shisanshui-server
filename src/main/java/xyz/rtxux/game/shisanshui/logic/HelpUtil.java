@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HelpUtil {
 	public static final List<String> numberList = new ArrayList<String>(Arrays.asList(
 			null, "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
 	));
+	
+	public static final ConcurrentHashMap<String, Card> cache = new ConcurrentHashMap<String, Card>();
 	public static String getSuitStr(int suit) {
 		if (PokerSuitEnum.SPADE.getValue() == suit) {
 			return "$";
@@ -34,9 +37,13 @@ public class HelpUtil {
 	}
 	
 	public static Card convertStringToSingleCard(String str) {
+		Card cached = cache.get(str);
+		if (cached != null) return cached;
 		int suit = getSuit("" + str.charAt(0));
-		int num = numberList.indexOf(str);
-		return new Card(num, suit);
+		int num = numberList.indexOf(str.substring(1));
+		cached = new Card(num, suit);
+		cache.put(cached.toString(), cached);
+		return cached;
 	}
 	
 	public static List<Card> converCardArrayToCardList(String[] cardArray) {
@@ -59,14 +66,23 @@ public class HelpUtil {
 		return cardString.replaceFirst(", ", "");
 	}
 	
-	public static List<Card> getRandomCardList() {
-		ArrayList<Card> allCards = new ArrayList<>();
+	public static void initCache() {
 		for (PokerSuitEnum pokerSuit : PokerSuitEnum.values()) {
 			for (int i = 1; i < 14; i++) {
-				allCards.add(new Card(i, pokerSuit.getValue()));
+				Card card = new Card(i, pokerSuit.getValue());
+				cache.put(card.toString(), card);
 			}
 		}
-		ArrayList<Card> availableCards = new ArrayList(allCards);
+	}
+	
+	public static List<Card> getRandomCardList() {
+//		ArrayList<Card> allCards = new ArrayList<>();
+//		for (PokerSuitEnum pokerSuit : PokerSuitEnum.values()) {
+//			for (int i = 1; i < 14; i++) {
+//				allCards.add(new Card(i, pokerSuit.getValue()));
+//			}
+//		}
+		ArrayList<Card> availableCards = new ArrayList(cache.values());
 		List<Card> cardList = new ArrayList<>();
 		Random random = new Random();
 		for (int i = 1; i < 14; i++) {
