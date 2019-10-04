@@ -20,6 +20,26 @@ class CompareContext(
         }
     }
 
+    private fun compareRound() {
+        for (i in 0 until userCombats.size - 1) {
+            for (j in i until userCombats.size) {
+                compare(userCombats[i], userCombats[j])
+            }
+        }
+        if (userCombats.size == 4) {
+            for (userCombat in userCombats) {
+                if (status[userCombat]!!.daQiang.size == 3) {
+                    for (daQiangEe in status[userCombat]!!.daQiang) {
+                        val score = daQiangEe.value
+                        status[userCombat]!!.score += score
+                        status[daQiangEe.key]!!.score -= score
+                    }
+                    break
+                }
+            }
+        }
+    }
+
     private fun compare(p1: UserCombatDO, p2: UserCombatDO) {
         val order = arrayOf(p1, p2)
         var tmpOrder: Array<UserCombatDO>
