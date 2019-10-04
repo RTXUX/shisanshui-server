@@ -30,8 +30,10 @@ data class UserCombatDO(
         @Type(type = "int-array")
         @Column(columnDefinition = "integer[]")
         var weight: Array<Int>? = null,
+        var special: Int? = null,
         var originalScore: Int? = null,
         var deltaScore: Int? = null,
+        var startTime: Instant? = null,
         var timestamp: Instant? = null
 )
 
