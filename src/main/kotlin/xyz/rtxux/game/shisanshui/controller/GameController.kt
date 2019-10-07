@@ -12,6 +12,7 @@ import xyz.rtxux.game.shisanshui.repository.CombatRepository
 import xyz.rtxux.game.shisanshui.repository.UserCombatRepository
 import xyz.rtxux.game.shisanshui.service.GameService
 import xyz.rtxux.game.shisanshui.util.GameUtil
+import javax.transaction.Transactional
 
 @RestController
 @RequestMapping("/game")
@@ -21,6 +22,7 @@ class GameController @Autowired constructor(
         private val userCombatRepository: UserCombatRepository
 ) {
 
+    @Transactional
     @RequestMapping("/submit", method = arrayOf(RequestMethod.POST))
     fun submit(@RequestBody submitDTO: SubmitDTO, @AuthenticationPrincipal userId: Int): Map<String, Any> {
         val cardGroup = submitDTO.card!!.map {
@@ -32,6 +34,7 @@ class GameController @Autowired constructor(
         )
     }
 
+    @Transactional
     @RequestMapping("/open", method = arrayOf(RequestMethod.POST))
     fun open(@AuthenticationPrincipal userId: Int): OpenCombatDTO {
         val availableCombat = combatRepository.findAllAvailableRoomForPlayer(userId)
