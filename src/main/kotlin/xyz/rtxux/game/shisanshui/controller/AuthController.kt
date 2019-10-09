@@ -40,6 +40,7 @@ class AuthController @Autowired constructor(
         val session = request.getSession(true)
         SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(user.id, null, listOf(SimpleGrantedAuthority("USER"))) as Authentication?
         return mapOf(
+                Pair("user_id", user.id!!),
                 Pair("token", session.id)
         )
     }

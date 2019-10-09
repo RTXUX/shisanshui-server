@@ -24,7 +24,7 @@ class HistoryController @Autowired constructor(
         return historyList.map {
             HistoryListEntry(
                     id = it.id!!.combatId!!,
-                    card = it.card!!.asIterable(),
+                    card = it.card!!.toList(),
                     score = when (it.deltaScore) {
                         null -> 0; else -> it.deltaScore!!
                     },

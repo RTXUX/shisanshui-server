@@ -20,6 +20,6 @@ interface CombatRepository : JpaRepository<CombatDO, Int> {
     fun findByIdForUpdate(id: Int): Optional<CombatDO>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select c from CombatDO c where c.finishTime is null and exists (select uc.id.combatId from UserCombatDO uc where uc.id.combatId=c.id group by uc.id.combatId having count(uc.id.userId)=4)")
+    @Query("select c from CombatDO c where c.finishTime is null and exists (select uc.id.combatId from UserCombatDO uc where uc.id.combatId=c.id and uc.timestamp is not null group by uc.id.combatId having count(uc.id.userId)=4)")
     fun findAllFinishedNotCalculatedRoom(): List<CombatDO>
 }
