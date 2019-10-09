@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "2.1.8.RELEASE"
@@ -24,6 +25,12 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven(url = "https://dl.bintray.com/kittinunf/maven")
+
+}
+
+tasks.getByName<BootJar>("bootJar") {
+    mainClassName = "xyz.rtxux.game.shisanshui.ShisanshuiApplicationKt"
 }
 
 dependencies {
@@ -37,6 +44,8 @@ dependencies {
     implementation("com.vladmihalcea:hibernate-types-52:2.7.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.github.kittinunf.fuel:fuel:2.2.1")
+    implementation("com.github.kittinunf.fuel:fuel-jackson:2.2.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("junit:junit:4.12")
     runtimeOnly("org.postgresql:postgresql")

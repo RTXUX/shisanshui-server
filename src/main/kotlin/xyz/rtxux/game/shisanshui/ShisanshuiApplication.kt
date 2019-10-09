@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import xyz.rtxux.game.shisanshui.logic.HelpUtil
-import xyz.rtxux.game.shisanshui.model.domain.UserDO
 import xyz.rtxux.game.shisanshui.repository.UserRepository
-import java.time.Instant
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -28,41 +26,46 @@ class DataLoader @Autowired constructor(
 ) : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
         HelpUtil.initCache()
-        userRepository.save(UserDO(
-                id = 1,
-                username = "test1",
-                password = passwordEncoder.encode("test1"),
-                studentNumber = "0",
-                createdAt = Instant.now(),
-                score = 0,
-                combatNumber = 0
-        ))
-        userRepository.save(UserDO(
-                id = 1,
-                username = "test2",
-                password = passwordEncoder.encode("test2"),
-                studentNumber = "0",
-                createdAt = Instant.now(),
-                score = 0,
-                combatNumber = 0
-        ))
-        userRepository.save(UserDO(
-                id = 1,
-                username = "test3",
-                password = passwordEncoder.encode("test3"),
-                studentNumber = "0",
-                createdAt = Instant.now(),
-                score = 0,
-                combatNumber = 0
-        ))
-        userRepository.save(UserDO(
-                id = 1,
-                username = "test4",
-                password = passwordEncoder.encode("test4"),
-                studentNumber = "0",
-                createdAt = Instant.now(),
-                score = 0,
-                combatNumber = 0
-        ))
+//        try {
+//            userRepository.save(UserDO(
+//                    id = 1,
+//                    username = "test1",
+//                    password = passwordEncoder.encode("test1"),
+//                    studentNumber = "0",
+//                    createdAt = Instant.now(),
+//                    score = 0,
+//                    combatNumber = 0
+//            ))
+//        } catch (e: Throwable) {
+//            println(e)
+//        }
+//
+//        userRepository.save(UserDO(
+//                id = 2,
+//                username = "test2",
+//                password = passwordEncoder.encode("test2"),
+//                studentNumber = "0",
+//                createdAt = Instant.now(),
+//                score = 0,
+//                combatNumber = 0
+//        ))
+//        userRepository.save(UserDO(
+//                id = 3,
+//                username = "test3",
+//                password = passwordEncoder.encode("test3"),
+//                studentNumber = "0",
+//                createdAt = Instant.now(),
+//                score = 0,
+//                combatNumber = 0
+//        ))
+//        userRepository.save(UserDO(
+//                id = 4,
+//                username = "test4",
+//                password = passwordEncoder.encode("test4"),
+//                studentNumber = "0",
+//                createdAt = Instant.now(),
+//                score = 0,
+//                combatNumber = 0
+//        ))
     }
 }

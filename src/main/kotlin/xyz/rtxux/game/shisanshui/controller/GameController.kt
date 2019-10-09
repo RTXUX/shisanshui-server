@@ -24,11 +24,11 @@ class GameController @Autowired constructor(
 
     @Transactional
     @RequestMapping("/submit", method = arrayOf(RequestMethod.POST))
-    fun submit(@RequestBody submitDTO: SubmitDTO, @AuthenticationPrincipal userId: Int): Map<String, Any> {
+    fun submit(@RequestBody submitDTO: SubmitDTO, @AuthenticationPrincipal userId: Int?): Map<String, Any> {
         val cardGroup = submitDTO.card!!.map {
             GameUtil.stringToCards(it)
         }.toList()
-        gameService.submitCards(userId, submitDTO.id!!, cardGroup)
+        gameService.submitCards(userId!!, submitDTO.id!!, cardGroup)
         return mapOf(
                 Pair("msg", "Success")
         )
@@ -36,8 +36,8 @@ class GameController @Autowired constructor(
 
     @Transactional
     @RequestMapping("/open", method = arrayOf(RequestMethod.POST))
-    fun open(@AuthenticationPrincipal userId: Int): OpenCombatDTO {
-        val availableCombat = combatRepository.findAllAvailableRoomForPlayer(userId)
+    fun open(@AuthenticationPrincipal userId: Int?): OpenCombatDTO {
+        val availableCombat = combatRepository.findAllAvailableRoomForPlayer(userId!!)
         if (availableCombat.size > 0) {
             for (combat in availableCombat) {
                 try {

@@ -52,8 +52,8 @@ class GameServiceImpl @Autowired constructor(
             CardSet.sortCards(mutableList)
             weights[index] = compareCtrl.calcWithoutSort(mutableList)
         }
-        for (i in 0..2) {
-            if (!(weights[i] < weights[i + 1])) {
+        for (i in 0..1) {
+            if (!(weights[i] <= weights[i + 1])) {
                 throw AppException("Illegal combinations", null, 2003)
             }
         }
@@ -61,6 +61,7 @@ class GameServiceImpl @Autowired constructor(
             it.joinToString(" ")
         }.toTypedArray()
         userCombat.weight = weights.toTypedArray()
+        userCombat.timestamp = Instant.now()
         userCombatRepository.save(userCombat)
 //        if (!GameUtil.checkSanity(cards)) {
 //            throw AppException("Illegal combinations", null, 2003)
@@ -73,7 +74,7 @@ class GameServiceImpl @Autowired constructor(
 
     @Transactional
     override fun joinCombat(playerId: Int, combatId: Int): OpenCombatDTO {
-        val combat = combatRepository.findById(combatId).orElseThrow { AppException("Room not found", null, 5000) }
+        val combat = combatRepository.findByIdForUpdate(combatId).orElseThrow { AppException("Room not found", null, 5000) }
         val usersInCombat = combat.users!!
         if (usersInCombat.size == 0 || usersInCombat.size > 3 || usersInCombat.any { it.id!!.userId == playerId }) {
             throw IllegalArgumentException("Room full or player already in room")
@@ -81,11 +82,16 @@ class GameServiceImpl @Autowired constructor(
         val cardSequenceString = combat.cardSequence!!
         val cardSequence = GameUtil.stringToCards(cardSequenceString)
         val cardToSend = cardSequence.subList((usersInCombat.size) * 13, (usersInCombat.size + 1) * 13)
+        if (cardToSend.size != 13) {
+            throw AppException("something is wrong", null, 5000)
+        }
         val openCombatDTO = OpenCombatDTO(id = combatId, card = cardToSend.joinToString(" "))
         val userCombatDO = UserCombatDO(
                 id = UserCombatId(userId = playerId, combatId = combatId),
                 card = arrayOf(openCombatDTO.card),
-                startTime = Instant.now()
+                startTime = Instant.now(),
+                user = userRepository.findById(playerId).orElseThrow(),
+                combat = combat
         )
         userCombatRepository.save(userCombatDO)
         return openCombatDTO
@@ -98,8 +104,11 @@ class GameServiceImpl @Autowired constructor(
         combat = combatRepository.save(combat)
         val cardToSend = cardSequence.subList(0, 13)
         val openCombatDTO = OpenCombatDTO(id = combat.id!!, card = cardToSend.joinToString(" "))
+        val userDO = userRepository.findById(playerId).orElseThrow()
         val userCombatDO = UserCombatDO(
                 id = UserCombatId(userId = playerId, combatId = combat.id!!),
+                user = userDO,
+                combat = combat,
                 card = arrayOf(openCombatDTO.card),
                 startTime = Instant.now()
         )

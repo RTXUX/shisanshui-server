@@ -6,7 +6,9 @@ import xyz.rtxux.game.shisanshui.logic.HelpUtil
 object GameUtil {
 
     fun checkCheat(cards: List<Card>, originalCards: List<Card>): Boolean {
-        return cards.equals(originalCards)
+        if (cards.size != originalCards.size) return false
+        if (originalCards.containsAll(cards) && cards.containsAll(cards)) return true
+        return false
     }
 
     fun checkSanity(cards: List<List<Card>>): Boolean {

@@ -145,7 +145,7 @@ public class CompareCtrl {
 							endCardList.add(cardList.get(k));
 							endCardList.add(cardList.get(m));
 							endCardList.add(cardList.get(n));
-							int weight = calcWithoutSort(endCardList);
+							int weight = calc(endCardList);
 							CardGroup endCardGroup = new CardGroup(endCardList, weight);
 							//尾道不为乌龙
 							if (PokerDefine.WU_LONG == endCardGroup.getType()) {
@@ -200,7 +200,7 @@ public class CompareCtrl {
 								middleCardList.add(tempCardList1.get(k));
 								middleCardList.add(tempCardList1.get(m));
 								middleCardList.add(tempCardList1.get(n));
-								int weight = calcWithoutSort(middleCardList);
+								int weight = calc(middleCardList);
 								CardGroup middleCardGroup = new CardGroup(middleCardList, weight);
 								//过滤权重相同的中道牌组
 								if (!isIncludeTongHua && middleWeightList.contains(middleCardGroup.getWeight())) {
@@ -212,7 +212,7 @@ public class CompareCtrl {
 									for (Card middleCard : middleCardGroup.getCardList()) {
 										tempCardList2.remove(middleCard);
 									}
-									int firstGroupWeight = calcWithoutSort(tempCardList2);
+									int firstGroupWeight = calc(tempCardList2);
 									CardGroup firstCardGroup = new CardGroup(tempCardList2, firstGroupWeight);
 									if (middleCardGroup.getWeight() > firstGroupWeight) {
 										CardHand cardHand = new CardHand();

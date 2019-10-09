@@ -20,3 +20,6 @@ spring:
       schema: classpath:org/springframework/session/jdbc/schema-postgresql.sql
       initialize-schema: always
       table-name: SPRING_SESSION
+
+server:
+  port: 12300

@@ -20,6 +20,11 @@ class CompareContext(
         }
     }
 
+    fun run(): Map<UserCombatDO, Int> {
+        compareRound()
+        return status.mapValues { it.value.score }
+    }
+
     private fun compareRound() {
         for (i in 0 until userCombats.size - 1) {
             for (j in i until userCombats.size) {

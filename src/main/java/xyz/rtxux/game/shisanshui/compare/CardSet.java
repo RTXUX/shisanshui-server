@@ -42,9 +42,9 @@ public abstract class CardSet {
 	 * 若是A，则值由1转为14
 	 */
 	public static int getCardValue(int num) {
-		if (num == CARD_A) {
-			num = CARD_MAX;
-		}
+//		if (num == CARD_A) {
+//			num = CARD_MAX;
+//		}
 		return num;
 	}
 	

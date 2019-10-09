@@ -27,6 +27,7 @@ class ResponseAdvice : ResponseBodyAdvice<Any> {
     @ResponseBody
     fun handleControllerException(request: HttpServletRequest, ex: Throwable): ResponseEntity<ResponseObject> {
         if (ex is AppException) return ResponseEntity.badRequest().body(ResponseObject(ex.status, ex.toString()))
+        //else throw ex
         return ResponseEntity.badRequest().body(ResponseObject(5000, ex.toString()))
     }
 }

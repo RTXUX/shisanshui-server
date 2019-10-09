@@ -2,6 +2,7 @@ package xyz.rtxux.game.shisanshui.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
@@ -11,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import xyz.rtxux.game.shisanshui.exception.AppException
+import xyz.rtxux.game.shisanshui.model.domain.UserDO
 import xyz.rtxux.game.shisanshui.model.dto.LoginDTO
+import xyz.rtxux.game.shisanshui.model.dto.RegisterDTO
 import xyz.rtxux.game.shisanshui.repository.UserRepository
+import java.time.Instant
 import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/auth")
-class LoginController @Autowired constructor(
+class AuthController @Autowired constructor(
         val userRepository: UserRepository,
         val passwordEncoder: PasswordEncoder
 ) {
@@ -34,7 +38,7 @@ class LoginController @Autowired constructor(
         }
         if (request.getSession(false) != null) request.getSession(false).invalidate()
         val session = request.getSession(true)
-        SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(user.id, null, listOf(SimpleGrantedAuthority("USER")))
+        SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(user.id, null, listOf(SimpleGrantedAuthority("USER"))) as Authentication?
         return mapOf(
                 Pair("token", session.id)
         )
@@ -57,6 +61,27 @@ class LoginController @Autowired constructor(
         session?.invalidate()
         return mapOf(
                 Pair("result", "Success")
+        )
+    }
+
+    @RequestMapping("/register", method = arrayOf(RequestMethod.POST))
+    fun register(@RequestBody registerDTO: RegisterDTO): Map<String, Any> {
+        val userOptional = userRepository.findUserDOByUsername(registerDTO.username);
+        if (!userOptional.isEmpty) {
+            throw AppException("Username already registered", null, 1001)
+        }
+        val user = UserDO(
+                username = registerDTO.username,
+                password = passwordEncoder.encode(registerDTO.password),
+                studentNumber = null,
+                createdAt = Instant.now(),
+                score = 5000,
+                combatNumber = null
+        )
+        val savedUser = userRepository.save(user)
+        return mapOf(
+                "msg" to "Success",
+                "user_id" to savedUser.id!!
         )
     }
 }
