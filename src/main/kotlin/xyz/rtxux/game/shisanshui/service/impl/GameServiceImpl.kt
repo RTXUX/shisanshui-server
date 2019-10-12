@@ -43,6 +43,7 @@ class GameServiceImpl @Autowired constructor(
         if (specialWeight > 0) {
             userCombat.special = specialWeight
             userCombat.card = arrayOf(flatCard.joinToString(" "))
+            userCombat.timestamp = Instant.now()
             userCombatRepository.save(userCombat)
             return
         }
