@@ -22,21 +22,23 @@ public class CardConfig {
 	public static int getSpecialMultiple(int type) {
 		switch (type) {
 			case PokerDefine.ZHI_ZUN_QING_LONG:
-				return 108;
+				return 52;
 			case PokerDefine.YI_TIAO_LONG:
-				return 36;
+				return 26;
 			case PokerDefine.SHI_ER_HUANG_ZU:
 				return 24;
 			case PokerDefine.SAN_TONG_HUA_SHUN:
-				return 20;
+				return 22;
 			case PokerDefine.SAN_ZHA_DAN:
 				return 20;
 			case PokerDefine.QUAN_DA:
-				return 10;
+				return 15;
 			case PokerDefine.QUAN_XIAO:
-				return 10;
+				return 12;
 			case PokerDefine.COU_YI_SE:
 				return 10;
+			case PokerDefine.SHUANG_GUAI_CHONG_SAN:
+				return 8;
 			case PokerDefine.SI_TAO_SAN_TIAO:
 				return 6;
 			case PokerDefine.WU_DUI_CHONG_SAN:
@@ -44,7 +46,6 @@ public class CardConfig {
 			case PokerDefine.LIU_DUI_BAN:
 				return 4;
 			case PokerDefine.SAN_SHUN_ZI:
-				return 4;
 			case PokerDefine.SAN_TONG_HUA:
 				return 3;
 		}
@@ -63,30 +64,30 @@ public class CardConfig {
 	//获取倍数积分 后期配置化
 	public static int getMultiple(int result, int pos) {
 		int type = CardSet.getType(result);
-		if (type == PokerDefine.SAN_TIAO && pos == 1) {
-			return 3;
-		}
+//		if (type == PokerDefine.SAN_TIAO && pos == 1) {
+//			return 3;
+//		}
 		if (type == PokerDefine.HU_LU && pos == 2) {
 			return 2;
 		}
 		if (type == PokerDefine.TIE_ZHI) {
 			if (pos == 2) {
-				return 7;
+				return 8;
 			}
 			return 4;
 		}
 		if (type == PokerDefine.TONG_HUA_SHUN) {
 			if (pos == 2) {
-				return 9;
+				return 10;
 			}
 			return 5;
 		}
-		if (type == PokerDefine.WU_TONG) {
-			if (pos == 2) {
-				return 11;
-			}
-			return 6;
-		}
+//		if (type == PokerDefine.WU_TONG) {
+//			if (pos == 2) {
+//				return 11;
+//			}
+//			return 6;
+//		}
 		return 1;
 	}
 }

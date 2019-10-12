@@ -30,7 +30,7 @@ public class PokerDefine {
 	public final static int CHONG_SAN = 20;
 	
 	// 三同花
-	public final static int SAN_TONG_HUA = 109;
+	public final static int SAN_TONG_HUA = 99;
 	// 三顺子
 	public final static int SAN_SHUN_ZI = 100;
 	// 六对半
