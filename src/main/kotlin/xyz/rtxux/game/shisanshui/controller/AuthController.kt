@@ -83,7 +83,7 @@ class AuthController @Autowired constructor(
                     password = passwordEncoder.encode(registerDTO.password),
                     studentNumber = null,
                     createdAt = Instant.now(),
-                    score = 5000,
+                    score = 0,
                     combatNumber = null
             )
             val savedUser = userRepository.save(user)
