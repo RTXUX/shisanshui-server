@@ -25,7 +25,12 @@ class CalcService @Autowired constructor(
             val compareContext = CompareContext(userCombatList)
             val result = compareContext.run()
             result.forEach {
-                it.key.deltaScore = it.value
+                val userCombat = it.key
+                val user = userCombat.user!!
+                userCombat.deltaScore = it.value
+                userCombat.originalScore = user.score
+                val newScore = user.score!! + it.value
+                user.score = newScore
             }
             combat.finishTime = Instant.now()
             combatRepository.save(combat)
