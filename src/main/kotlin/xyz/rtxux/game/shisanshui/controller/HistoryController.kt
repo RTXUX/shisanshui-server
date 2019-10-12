@@ -45,7 +45,7 @@ class HistoryController @Autowired constructor(
                     val user = it.user!!
                     HistoryPlayerDetail(
                             name = user.username!!,
-                            playerId = user.id!!,
+                            player_id = user.id!!,
                             score = it.deltaScore!!,
                             card = it.card!!.toList()
                     )

@@ -20,6 +20,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .antMatchers("/rank", "/rank/**").permitAll()
                 .anyRequest().authenticated()
     }
 

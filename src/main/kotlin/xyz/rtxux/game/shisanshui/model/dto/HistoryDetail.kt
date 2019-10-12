@@ -7,7 +7,7 @@ data class HistoryDetail(
 )
 
 data class HistoryPlayerDetail(
-        val playerId: Int,
+        val player_id: Int,
         val name: String,
         val score: Int,
         val card: Iterable<String>
