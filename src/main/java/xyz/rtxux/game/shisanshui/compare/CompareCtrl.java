@@ -39,6 +39,8 @@ public class CompareCtrl {
 		addSpecialState(QuanXiao.class);
 		//凑一色
 		addSpecialState(CouYiSe.class);
+		//双怪冲三
+		addSpecialState(ShuangGuaiChongSan.class);
 		//四套三条
 		addSpecialState(SiTaoSanTiao.class);
 		//五对冲三

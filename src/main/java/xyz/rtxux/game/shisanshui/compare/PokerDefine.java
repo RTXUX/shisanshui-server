@@ -30,15 +30,17 @@ public class PokerDefine {
 	public final static int CHONG_SAN = 20;
 	
 	// 三同花
-	public final static int SAN_TONG_HUA = 100;
+	public final static int SAN_TONG_HUA = 109;
 	// 三顺子
-	public final static int SAN_SHUN_ZI = 101;
+	public final static int SAN_SHUN_ZI = 100;
 	// 六对半
-	public final static int LIU_DUI_BAN = 102;
+	public final static int LIU_DUI_BAN = 101;
 	// 五对冲三
-	public final static int WU_DUI_CHONG_SAN = 103;
+	public final static int WU_DUI_CHONG_SAN = 102;
 	// 四套三条
-	public final static int SI_TAO_SAN_TIAO = 104;
+	public final static int SI_TAO_SAN_TIAO = 103;
+	// 双怪冲三
+	public final static int SHUANG_GUAI_CHONG_SAN = 104;
 	// 凑一色
 	public final static int COU_YI_SE = 105;
 	// 全小
