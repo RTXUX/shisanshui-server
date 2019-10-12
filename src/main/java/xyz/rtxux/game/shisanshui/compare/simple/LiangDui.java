@@ -38,6 +38,7 @@ public class LiangDui extends CardSet {
 			return PokerDefine.NULL;
 		}
 		duiList = sortCardByEndA(duiList);
+		if (duiList.get(0).getNumber() == duiList.get(1).getNumber() - 1) duiList.add(2, duiList.get(1));
 		duiList.add(0, danCard);
 		return typeVal + getCardListWeight(duiList);
 	}

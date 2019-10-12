@@ -12,7 +12,7 @@ import javax.persistence.LockModeType
 @Repository
 interface CombatRepository : JpaRepository<CombatDO, Int> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select c from CombatDO c where id in (select uc.id.combatId from UserCombatDO uc where not exists (select uc2 from UserCombatDO uc2 where uc2.id.combatId = uc.id.combatId and uc2.id.userId = :playerId) group by uc.id.combatId having count(combat_id) < 4)")
+    @Query("select c from CombatDO c where id in (select uc.id.combatId from UserCombatDO uc where not exists (select uc2 from UserCombatDO uc2 where uc2.id.combatId = uc.id.combatId and uc2.id.userId = :playerId) group by uc.id.combatId having count(uc.id.userId) < 4)")
     fun findAllAvailableRoomForPlayer(@Param("playerId") playerId: Int): List<CombatDO>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)

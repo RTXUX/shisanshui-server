@@ -5,7 +5,12 @@ import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 @Entity
-@Table(name = "user")
+@Table(
+        name = "user",
+        uniqueConstraints = arrayOf(
+                UniqueConstraint(name = "username", columnNames = arrayOf("username"))
+        )
+)
 data class UserDO(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
