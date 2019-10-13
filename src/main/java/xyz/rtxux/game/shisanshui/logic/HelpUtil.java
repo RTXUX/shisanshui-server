@@ -1,5 +1,7 @@
 package xyz.rtxux.game.shisanshui.logic;
 
+import xyz.rtxux.game.shisanshui.exception.AppException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +33,10 @@ public class HelpUtil {
 			return PokerSuitEnum.HEART.getValue();
 		} else if ("#".equals(suit)) {
 			return PokerSuitEnum.DIAMOND.getValue();
-		} else {
+		} else if ("*".equals(suit)) {
 			return PokerSuitEnum.CLUB.getValue();
+		} else {
+			throw new AppException("Format Error", null, 2005);
 		}
 	}
 	
@@ -41,6 +45,9 @@ public class HelpUtil {
 		if (cached != null) return cached;
 		int suit = getSuit("" + str.charAt(0));
 		int num = numberList.indexOf(str.substring(1));
+		if (num < 1) {
+			throw new AppException("Format Error", null, 2005);
+		}
 		cached = new Card(num, suit);
 		cache.put(cached.toString(), cached);
 		return cached;

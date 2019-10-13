@@ -55,7 +55,7 @@ class GameServiceImpl @Autowired constructor(
         }
         for (i in 0..1) {
             if (!(weights[i] <= weights[i + 1])) {
-                throw AppException("Illegal combinations", null, 2003)
+                throw AppException("Illegal combinations", null, 2004)
             }
         }
         userCombat.card = cards.map {
