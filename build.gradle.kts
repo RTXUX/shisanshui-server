@@ -33,11 +33,18 @@ tasks.getByName<BootJar>("bootJar") {
     mainClassName = "xyz.rtxux.game.shisanshui.ShisanshuiApplicationKt"
 }
 
+configurations {
+    all {
+        exclude("org.springframework.boot", "spring-boot-starter-tomcat")
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
