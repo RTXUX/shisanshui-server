@@ -7,26 +7,24 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.transaction.annotation.Isolation
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import xyz.rtxux.game.shisanshui.exception.AppException
-import xyz.rtxux.game.shisanshui.model.domain.UserDO
 import xyz.rtxux.game.shisanshui.model.dto.LoginDTO
 import xyz.rtxux.game.shisanshui.model.dto.RegisterDTO
 import xyz.rtxux.game.shisanshui.repository.UserRepository
-import java.time.Instant
+import xyz.rtxux.game.shisanshui.service.AuthService
 import java.util.concurrent.locks.ReentrantLock
 import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/auth")
 class AuthController @Autowired constructor(
-        val userRepository: UserRepository,
-        val passwordEncoder: PasswordEncoder
+        private val userRepository: UserRepository,
+        private val passwordEncoder: PasswordEncoder,
+        private val authService: AuthService
 ) {
     val registerLock = ReentrantLock()
 
@@ -69,28 +67,11 @@ class AuthController @Autowired constructor(
         )
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
     @RequestMapping("/register", method = arrayOf(RequestMethod.POST))
     fun register(@RequestBody registerDTO: RegisterDTO): Map<String, Any> {
         try {
             registerLock.lock()
-            val userOptional = userRepository.findUserDOByUsername(registerDTO.username);
-            if (!userOptional.isEmpty) {
-                throw AppException("Username already registered", null, 1001)
-            }
-            val user = UserDO(
-                    username = registerDTO.username,
-                    password = passwordEncoder.encode(registerDTO.password),
-                    studentNumber = null,
-                    createdAt = Instant.now(),
-                    score = 0,
-                    combatNumber = null
-            )
-            val savedUser = userRepository.save(user)
-            return mapOf(
-                    "msg" to "Success",
-                    "user_id" to savedUser.id!!
-            )
+            return authService.register(registerDTO)
         } catch (e: Throwable) {
             throw e
         } finally {
