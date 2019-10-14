@@ -28,6 +28,7 @@ class GameServiceImpl @Autowired constructor(
 
     @Transactional
     override fun submitCards(playerId: Int, combatId: Int, cards: List<List<Card>>) {
+        if (cards.size != 3) throw AppException("Format Error", null, 2005)
         val userCombat = userCombatRepository.findById(UserCombatId(playerId, combatId)).orElseThrow { AppException("Corresponding combat not found", null, 2003) }
         if (userCombat.card!!.size != 1) {
             throw AppException("Illegal card status", null, 2003)
