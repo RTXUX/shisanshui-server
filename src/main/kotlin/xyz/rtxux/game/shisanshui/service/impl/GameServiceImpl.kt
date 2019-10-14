@@ -2,6 +2,7 @@ package xyz.rtxux.game.shisanshui.service.impl
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import xyz.rtxux.game.shisanshui.compare.CardSet
 import xyz.rtxux.game.shisanshui.compare.CompareCtrl
 import xyz.rtxux.game.shisanshui.exception.AppException
@@ -16,7 +17,6 @@ import xyz.rtxux.game.shisanshui.repository.UserRepository
 import xyz.rtxux.game.shisanshui.service.GameService
 import xyz.rtxux.game.shisanshui.util.GameUtil
 import java.time.Instant
-import javax.transaction.Transactional
 
 @Service
 class GameServiceImpl @Autowired constructor(
@@ -52,6 +52,7 @@ class GameServiceImpl @Autowired constructor(
         mutableCards.forEachIndexed { index, mutableList ->
             CardSet.sortCards(mutableList)
             weights[index] = compareCtrl.calcWithoutSort(mutableList)
+            if (weights[index] == -1) throw AppException("Illegal combinations", null, 2004)
         }
         for (i in 0..1) {
             if (!(weights[i] <= weights[i + 1])) {
@@ -94,6 +95,8 @@ class GameServiceImpl @Autowired constructor(
                 user = userRepository.findById(playerId).orElseThrow(),
                 combat = combat
         )
+        combat.users!!.add(userCombatDO)
+        //combatRepository.save(combat)
         userCombatRepository.save(userCombatDO)
         return openCombatDTO
     }

@@ -2,6 +2,7 @@ package xyz.rtxux.game.shisanshui.logic;
 
 import xyz.rtxux.game.shisanshui.exception.AppException;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,14 +44,15 @@ public class HelpUtil {
 	public static Card convertStringToSingleCard(String str) {
 		Card cached = cache.get(str);
 		if (cached != null) return cached;
-		int suit = getSuit("" + str.charAt(0));
-		int num = numberList.indexOf(str.substring(1));
-		if (num < 1) {
-			throw new AppException("Format Error", null, 2005);
-		}
-		cached = new Card(num, suit);
-		cache.put(cached.toString(), cached);
-		return cached;
+//		int suit = getSuit("" + str.charAt(0));
+//		int num = numberList.indexOf(str.substring(1));
+//		if (num < 1) {
+//			throw new AppException("Format Error", null, 2005);
+//		}
+//		cached = new Card(num, suit);
+//		cache.put(cached.toString(), cached);
+//		return cached;
+		throw new AppException("Format Error", null, 2005);
 	}
 	
 	public static List<Card> converCardArrayToCardList(String[] cardArray) {
@@ -91,7 +93,7 @@ public class HelpUtil {
 //		}
 		ArrayList<Card> availableCards = new ArrayList(cache.values());
 		List<Card> cardList = new ArrayList<>();
-		Random random = new Random();
+		Random random = new SecureRandom();
 		for (int i = 1; i < 14; i++) {
 			int index = random.nextInt(availableCards.size());
 			Card card = availableCards.get(index);

@@ -34,7 +34,7 @@ class GameController @Autowired constructor(
         )
     }
 
-    @Transactional
+    //@Transactional
     @RequestMapping("/open", method = arrayOf(RequestMethod.POST))
     fun open(@AuthenticationPrincipal userId: Int?): OpenCombatDTO {
         val availableCombat = combatRepository.findAllAvailableRoomForPlayer(userId!!)
@@ -43,6 +43,8 @@ class GameController @Autowired constructor(
                 try {
                     return gameService.joinCombat(userId, combat.id!!)
                 } catch (e: Exception) {
+                    println(e)
+                    println("${userId}, ${combat.id!!}")
                     continue
                 }
             }

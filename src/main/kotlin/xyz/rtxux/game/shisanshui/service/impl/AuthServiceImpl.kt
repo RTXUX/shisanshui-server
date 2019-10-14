@@ -1,5 +1,6 @@
 package xyz.rtxux.game.shisanshui.service.impl
 
+import com.github.kittinunf.fuel.Fuel
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -16,8 +17,12 @@ class AuthServiceImpl @Autowired constructor(
         private val userRepository: UserRepository,
         private val passwordEncoder: PasswordEncoder
 ) : AuthService {
+
+    companion object {
+        val jwcUrl = "http://59.77.226.32/logincheck.asp"
+    }
     @Transactional
-    override fun register(registerDTO: RegisterDTO): Map<String, Any> {
+    override fun register(registerDTO: RegisterDTO, studentNumber: String?): Map<String, Any> {
         val userOptional = userRepository.findUserDOByUsername(registerDTO.username);
         if (!userOptional.isEmpty) {
             throw AppException("Username already registered", null, 1001)
@@ -25,7 +30,7 @@ class AuthServiceImpl @Autowired constructor(
         val user = UserDO(
                 username = registerDTO.username,
                 password = passwordEncoder.encode(registerDTO.password),
-                studentNumber = null,
+                studentNumber = studentNumber,
                 createdAt = Instant.now(),
                 score = 0,
                 combatNumber = null
@@ -35,5 +40,16 @@ class AuthServiceImpl @Autowired constructor(
                 "msg" to "Success",
                 "user_id" to savedUser.id!!
         )
+    }
+
+    override fun authJwc(studentNumber: String, password: String): String {
+        val (_, response, result) = Fuel.post(jwcUrl, listOf(
+                "muser" to studentNumber,
+                "passwd" to password,
+                "x" to "4",
+                "y" to "4"
+        )).allowRedirects(false).responseString()
+        if (response.statusCode == 302) return studentNumber
+        throw AppException("Failed to authenticate with jiaowuchu", null, 1003)
     }
 }

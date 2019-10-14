@@ -23,3 +23,4 @@ spring:
 
 server:
   port: 12300
+  use-forward-headers: true

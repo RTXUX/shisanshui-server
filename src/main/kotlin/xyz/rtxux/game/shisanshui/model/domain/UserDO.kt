@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull
 @Table(
         name = "user",
         uniqueConstraints = arrayOf(
-                UniqueConstraint(name = "username", columnNames = arrayOf("username"))
+                UniqueConstraint(name = "username", columnNames = arrayOf("username")),
+                UniqueConstraint(name = "student_number", columnNames = arrayOf("student_number"))
         )
 )
 data class UserDO(
@@ -21,6 +22,7 @@ data class UserDO(
         @NotNull
         var password: String? = null,
         @NotNull
+        @Column(name = "student_number")
         var studentNumber: String? = null,
         @NotNull
         var createdAt: Instant? = null,

@@ -30,7 +30,7 @@ class CalcService @Autowired constructor(
                 userCombat.deltaScore = it.value
                 userCombat.originalScore = user.score
                 val newScore = user.score!! + it.value
-                user.score = newScore
+                user.score = if (newScore > 0) newScore else 0
             }
             combat.finishTime = Instant.now()
             combatRepository.save(combat)

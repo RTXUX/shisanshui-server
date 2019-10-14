@@ -11,7 +11,7 @@ data class CombatDO(
         var id: Int? = null,
         var finishTime: Instant? = null,
         @OneToMany(mappedBy = "combat")
-        var users: List<UserCombatDO>? = null,
+        var users: MutableList<UserCombatDO>? = null,
         var cardSequence: String? = null
 )
 

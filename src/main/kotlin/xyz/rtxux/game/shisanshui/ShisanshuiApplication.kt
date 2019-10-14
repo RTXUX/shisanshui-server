@@ -8,6 +8,7 @@ import org.springframework.boot.runApplication
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
+import org.springframework.transaction.support.AbstractPlatformTransactionManager
 import xyz.rtxux.game.shisanshui.logic.HelpUtil
 import xyz.rtxux.game.shisanshui.repository.UserRepository
 
@@ -22,10 +23,12 @@ fun main(args: Array<String>) {
 @Component
 class DataLoader @Autowired constructor(
         val userRepository: UserRepository,
-        val passwordEncoder: PasswordEncoder
+        val passwordEncoder: PasswordEncoder,
+        val transactionManager: AbstractPlatformTransactionManager
 ) : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
         HelpUtil.initCache()
+        transactionManager.isNestedTransactionAllowed = true
 //        try {
 //            userRepository.save(UserDO(
 //                    id = 1,
