@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
+import xyz.rtxux.game.shisanshui.exception.AppException
 import xyz.rtxux.game.shisanshui.model.dto.OpenCombatDTO
 import xyz.rtxux.game.shisanshui.model.dto.SubmitDTO
 import xyz.rtxux.game.shisanshui.repository.CombatRepository
 import xyz.rtxux.game.shisanshui.repository.UserCombatRepository
+import xyz.rtxux.game.shisanshui.repository.UserRepository
 import xyz.rtxux.game.shisanshui.service.GameService
 import xyz.rtxux.game.shisanshui.util.GameUtil
 import javax.transaction.Transactional
@@ -19,7 +21,8 @@ import javax.transaction.Transactional
 class GameController @Autowired constructor(
         private val gameService: GameService,
         private val combatRepository: CombatRepository,
-        private val userCombatRepository: UserCombatRepository
+        private val userCombatRepository: UserCombatRepository,
+        private val userRepository: UserRepository
 ) {
 
     @Transactional
@@ -49,6 +52,7 @@ class GameController @Autowired constructor(
                 }
             }
         }
+        if (userRepository.countUnfinishedCombat(userId) > 100) throw AppException("Too many unfinished combats", null, 2001)
         return gameService.newCombat(userId)
     }
 

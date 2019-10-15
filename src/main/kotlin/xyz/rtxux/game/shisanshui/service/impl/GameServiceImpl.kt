@@ -16,6 +16,7 @@ import xyz.rtxux.game.shisanshui.repository.UserCombatRepository
 import xyz.rtxux.game.shisanshui.repository.UserRepository
 import xyz.rtxux.game.shisanshui.service.GameService
 import xyz.rtxux.game.shisanshui.util.GameUtil
+import java.time.Duration
 import java.time.Instant
 
 @Service
@@ -30,9 +31,10 @@ class GameServiceImpl @Autowired constructor(
     override fun submitCards(playerId: Int, combatId: Int, cards: List<List<Card>>) {
         if (cards.size != 3) throw AppException("Format Error", null, 2005)
         val userCombat = userCombatRepository.findById(UserCombatId(playerId, combatId)).orElseThrow { AppException("Corresponding combat not found", null, 2003) }
-        if (userCombat.card!!.size != 1) {
+        if (userCombat.timestamp != null) {
             throw AppException("Illegal card status", null, 2003)
         }
+        if (Duration.between(userCombat.startTime!!, Instant.now()).seconds > 10) throw AppException("Timeout", null, 2006)
         val originalCardString = userCombat.card!![0]
         val originalCards = GameUtil.stringToCards(originalCardString)
         if (!GameUtil.checkCheat(cards.flatMap { it }.toList(), originalCards)) {
